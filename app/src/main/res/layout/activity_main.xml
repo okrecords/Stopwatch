@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_time_whole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <TextView
+                android:id="@+id/whole_text_minute"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/whole_time_text_size"
+                app:layout_constraintEnd_toStartOf="@+id/whole_divide_minute_second"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2" />
+
+            <TextView
+                android:id="@+id/whole_divide_minute_second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="@dimen/whole_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/whole_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/whole_text_second"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/whole_text_minute"
+                app:layout_constraintTop_toTopOf="@+id/whole_text_minute"
+                app:layout_constraintWidth_percent="0.1" />
+
+            <TextView
+                android:id="@+id/whole_text_second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/whole_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/whole_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/whole_divide_second_frame"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/whole_divide_minute_second"
+                app:layout_constraintTop_toTopOf="@+id/whole_text_minute"
+                app:layout_constraintWidth_percent="0.2" />
+
+            <TextView
+                android:id="@+id/whole_divide_second_frame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="."
+                android:textColor="@color/black"
+                android:textSize="@dimen/whole_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/whole_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/whole_text_frame"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/whole_text_second"
+                app:layout_constraintTop_toTopOf="@+id/whole_text_minute"
+                app:layout_constraintWidth_percent="0.1" />
+
+            <TextView
+                android:id="@+id/whole_text_frame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/whole_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/whole_text_minute"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/whole_divide_second_frame"
+                app:layout_constraintTop_toTopOf="@+id/whole_text_minute"
+                app:layout_constraintWidth_percent="0.2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_time_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/section_text_minute"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/section_time_text_size"
+                app:layout_constraintEnd_toStartOf="@+id/section_divide_minute_second"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.1" />
+
+            <TextView
+                android:id="@+id/section_divide_minute_second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/section_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/section_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/section_text_second"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/section_text_minute"
+                app:layout_constraintTop_toTopOf="@+id/section_text_minute"
+                app:layout_constraintWidth_percent="0.05" />
+
+            <TextView
+                android:id="@+id/section_text_second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/section_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/section_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/section_divide_second_frame"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/section_divide_minute_second"
+                app:layout_constraintTop_toTopOf="@+id/section_text_minute"
+                app:layout_constraintWidth_percent="0.1" />
+
+            <TextView
+                android:id="@+id/section_divide_second_frame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="."
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/section_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/section_text_minute"
+                app:layout_constraintEnd_toStartOf="@+id/section_text_frame"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/section_text_second"
+                app:layout_constraintTop_toTopOf="@+id/section_text_minute"
+                app:layout_constraintWidth_percent="0.05" />
+
+            <TextView
+                android:id="@+id/section_text_frame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/section_time_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/section_text_minute"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/section_divide_second_frame"
+                app:layout_constraintTop_toTopOf="@+id/section_text_minute"
+                app:layout_constraintWidth_percent="0.1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_time">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_rv">
+
+        <Button
+            android:id="@+id/btn_record"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_btn_record"
+            android:text="구간 기록"
+            android:textColor="@color/gray_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <Button
+            android:id="@+id/btn_start"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_btn_start"
+            android:text="시작"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_record"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_record"
+            app:layout_constraintTop_toTopOf="@+id/btn_record"
+            app:layout_constraintWidth_percent="0.3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
