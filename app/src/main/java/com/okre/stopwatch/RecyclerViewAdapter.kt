@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.okre.stopwatch.databinding.RecyclerItemBinding
 
-class RecyclerViewAdapter(private val list: MutableList<RecordData>, private val owner: Activity)
+class RecyclerViewAdapter(private val list: MutableList<RecordData>)
     :RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
 
     inner class ViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root)

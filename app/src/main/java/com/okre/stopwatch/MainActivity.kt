@@ -2,7 +2,10 @@ package com.okre.stopwatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
+import com.okre.stopwatch.RecyclerFragment.Companion.mAdapter
+import com.okre.stopwatch.RecyclerFragment.Companion.myData
 import com.okre.stopwatch.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.concurrent.timer
@@ -21,12 +24,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bining: ActivityMainBinding
     private var right = START
     private var left = RECORD_START
-    private var repeatedTime = 0
     private var timeTask: Timer? = null
 
+    private var repeatedTime = 0
     var frame: Int = 0
     var second: Int = 0
     var minute: Int = 0
+
+    var rvRepeatedTime = 0
+    var rvFrame: Int = 0
+    var rvSecond: Int = 0
+    var rvMinute: Int = 0
+    var section = 0
+
+    var wholeMinute: String = "00"
+    var wholeSecond: String = "00"
+    var wholeFrame: String = "00"
+
+    var sectionMinute: String = "00"
+    var sectionSecond: String = "00"
+    var sectionFrame: String = "00"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +65,22 @@ class MainActivity : AppCompatActivity() {
                 buttonDesign(right)
 
                 // 오른쪽: 시작, 중지, 계속
-                if (right == START) { // 시작
-                    start()
-                    right = STOP
-                    left = RECORD
-                } else if (right == STOP) { // 중지
-                    stop()
-                    right = CONTINUE
-                    left = RESET
-                } else { // 계속
-                    continueTimer()
-                    right = STOP
-                    left = RECORD
+                when (right) {
+                    START -> { // 시작
+                        start()
+                        right = STOP
+                        left = RECORD
+                    }
+                    STOP -> {// 중지
+                        stop()
+                        right = CONTINUE
+                        left = RESET
+                    }
+                    else -> {// 계속
+                        continueTimer()
+                        right = STOP
+                        left = RECORD
+                    }
                 }
             }
 
@@ -68,13 +89,20 @@ class MainActivity : AppCompatActivity() {
                 buttonDesign(left)
 
                 // 왼쪽: 구간기록, 초기화
-                if (left == RECORD) { // 구간기록
-                } else if (left == RESET) { // 초기화
-                    reset()
-                    left = RECORD_START
-                    right = START
-                } else { //
-
+                when (left) {
+                    RECORD -> { // 구간기록
+                        record()
+                        layoutTimeSection.visibility = View.VISIBLE
+                        layoutRv.visibility = View.VISIBLE
+                    }
+                    RESET -> { // 초기화
+                        reset()
+                        layoutTimeSection.visibility = View.GONE
+                        layoutRv.visibility = View.INVISIBLE
+                        left = RECORD_START
+                        right = START
+                    }
+                    else -> {} // 구간기록 처음
                 }
             }
         }
@@ -134,6 +162,14 @@ class MainActivity : AppCompatActivity() {
                 minute ++
             }
 
+            rvRepeatedTime++
+            rvFrame = rvRepeatedTime % 100
+            rvSecond = rvRepeatedTime / 100
+            if (rvSecond == 60) {
+                rvRepeatedTime = 0
+                rvMinute++
+            }
+
             runOnUiThread {
                 timeUi()
             }
@@ -142,9 +178,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun timeUi() {
         with(bining) {
-            wholeTextMinute.text = if (minute < 10) { "0$minute" } else { "$minute" }
-            wholeTextSecond.text = if (second < 10) { "0$second" } else { "$second" }
-            wholeTextFrame.text = if (frame < 10) { "0$frame" } else { "$frame" }
+            wholeMinute = if (minute < 10) { "0$minute" } else { "$minute" }
+            wholeSecond = if (second < 10) { "0$second" } else { "$second" }
+            wholeFrame = if (frame < 10) { "0$frame" } else { "$frame" }
+            wholeTextMinute.text = wholeMinute
+            wholeTextSecond.text = wholeSecond
+            wholeTextFrame.text = wholeFrame
+
+            sectionMinute = if (rvMinute < 10) { "0$rvMinute" } else { "$rvMinute" }
+            sectionSecond = if (rvSecond < 10) { "0$rvSecond" } else { "$rvSecond" }
+            sectionFrame = if (rvFrame < 10) { "0$rvFrame" } else { "$rvFrame" }
+
+            sectionTextMinute.text = sectionMinute
+            sectionTextSecond.text = sectionSecond
+            sectionTextFrame.text = sectionFrame
         }
     }
 
@@ -154,8 +201,35 @@ class MainActivity : AppCompatActivity() {
         frame = 0
         second = 0
         minute = 0
+
+        section = 0
+        rvRepeatedTime = 0
+        rvFrame = 0
+        rvSecond = 0
+        rvMinute = 0
+
+        //myData.clear()
+        //myData.remove()
+        //mAdapter.notifyItemRangeRemoved(0, mAdapter.itemCount)
+
         runOnUiThread {
             timeUi()
         }
+    }
+
+    private fun record() {
+        section++
+        val sectionData = if (section < 10) { "0$section" } else { "$section" }
+
+        val recordData = "$sectionMinute:$sectionSecond.$sectionFrame"
+        val wholeTimeData = "$wholeMinute:$wholeSecond.$wholeFrame"
+
+        myData.add(RecordData(sectionData, recordData, wholeTimeData))
+        mAdapter.notifyItemInserted(myData.size)
+
+        rvRepeatedTime = 0
+        rvFrame = 0
+        rvSecond = 0
+        rvMinute = 0
     }
 }

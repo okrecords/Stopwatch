@@ -2,10 +2,10 @@ package com.okre.stopwatch
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okre.stopwatch.databinding.FragmentRecyclerBinding
 
@@ -15,6 +15,8 @@ class RecyclerFragment : Fragment() {
 
     companion object {
         fun newInstance() = RecyclerFragment()
+        var myData = mutableListOf<RecordData>()
+        var mAdapter: RecyclerViewAdapter = RecyclerViewAdapter(myData)
     }
 
     override fun onCreateView(
@@ -27,13 +29,13 @@ class RecyclerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val manager = LinearLayoutManager(activity as Activity, LinearLayoutManager.VERTICAL, false)
+
+        //mAdapter = RecyclerViewAdapter(myData)
+        val manager = LinearLayoutManager(activity as Activity, LinearLayoutManager.VERTICAL, true)
 
         with(binding.rv) {
             layoutManager = manager
-            //adapter = RecyclerViewAdapter
+            adapter = mAdapter
         }
     }
-
-
 }

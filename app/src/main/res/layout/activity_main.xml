@@ -103,7 +103,7 @@
             android:id="@+id/layout_time_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/section_text_minute"
@@ -187,6 +187,7 @@
         android:id="@+id/layout_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.53"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +210,6 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_rv">
 
         <Button
-            android:textStyle="bold"
             android:id="@+id/btn_record"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
@@ -217,6 +217,7 @@
             android:background="@drawable/background_btn_record"
             android:text="@string/recordS"
             android:textColor="@color/gray_dark"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_start"
             app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +225,6 @@
             app:layout_constraintWidth_percent="0.3" />
 
         <Button
-            android:textStyle="bold"
             android:id="@+id/btn_start"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
@@ -232,6 +232,7 @@
             android:background="@drawable/background_btn_start"
             android:text="@string/startS"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btn_record"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_record"
