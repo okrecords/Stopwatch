@@ -2,4 +2,9 @@
     <string name="app_name">Stopwatch</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="startS">시작</string>
+    <string name="stopS">중지</string>
+    <string name="continueS">계속</string>
+    <string name="recordS">구간 기록</string>
+    <string name="resetS">초기화</string>
 </resources>

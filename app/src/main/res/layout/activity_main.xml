@@ -209,12 +209,13 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_rv">
 
         <Button
+            android:textStyle="bold"
             android:id="@+id/btn_record"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_btn_record"
-            android:text="구간 기록"
+            android:text="@string/recordS"
             android:textColor="@color/gray_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_start"
@@ -223,12 +224,13 @@
             app:layout_constraintWidth_percent="0.3" />
 
         <Button
+            android:textStyle="bold"
             android:id="@+id/btn_start"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_btn_start"
-            android:text="시작"
+            android:text="@string/startS"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btn_record"
             app:layout_constraintEnd_toEndOf="parent"
