@@ -30,8 +30,8 @@ class RecyclerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //mAdapter = RecyclerViewAdapter(myData)
-        val manager = LinearLayoutManager(activity as Activity, LinearLayoutManager.VERTICAL, true)
+        //val manager = LinearLayoutManager(activity as Activity, LinearLayoutManager.VERTICAL, true)
+        val manager = LinearLayoutManagerWrapper(requireContext(), LinearLayoutManager.VERTICAL, true)
 
         with(binding.rv) {
             layoutManager = manager

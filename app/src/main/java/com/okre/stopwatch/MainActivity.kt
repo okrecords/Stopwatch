@@ -1,14 +1,14 @@
 package com.okre.stopwatch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.okre.stopwatch.RecyclerFragment.Companion.mAdapter
 import com.okre.stopwatch.RecyclerFragment.Companion.myData
 import com.okre.stopwatch.databinding.ActivityMainBinding
 import java.util.*
-import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
 
@@ -208,9 +208,8 @@ class MainActivity : AppCompatActivity() {
         rvSecond = 0
         rvMinute = 0
 
-        //myData.clear()
-        //myData.remove()
-        //mAdapter.notifyItemRangeRemoved(0, mAdapter.itemCount)
+        myData.removeAll(myData)
+        mAdapter.notifyItemRangeRemoved(0, mAdapter.itemCount)
 
         runOnUiThread {
             timeUi()
