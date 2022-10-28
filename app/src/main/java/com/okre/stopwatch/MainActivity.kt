@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
 
+        // 구간기록 fragment 연결
         if (savedInstanceState == null) {
             val ft = supportFragmentManager.beginTransaction()
             with(ft) {
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(bining) {
-            btnStart.setOnClickListener {
+            btnStart.setOnClickListener { // 오른쪽 버튼 클릭
                 // 버튼 모양 변경
                 buttonDesign(right)
 
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            btnRecord.setOnClickListener {
+            btnRecord.setOnClickListener { // 왼쪽 버튼 클릭
                 // 버튼 모양 변경
                 buttonDesign(left)
 
@@ -108,21 +109,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 시작
     private fun start() {
         timeTaskStart()
     }
 
+    // 중지
     private fun stop() {
         timeTask?.cancel()
     }
 
+    //계속
     private fun continueTimer() {
         timeTaskStart()
     }
 
+    // 버튼 모양 변경
     private fun buttonDesign(touch: String) {
         when (touch) {
-            START, CONTINUE -> {
+            START, CONTINUE -> { // 시작, 계속
                 // 오른쪽
                 bining.btnStart.setBackgroundResource(R.drawable.background_btn_stop)
                 bining.btnStart.text = getString(R.string.stopS)
@@ -131,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                 bining.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.black))
                 bining.btnRecord.text = getString(R.string.recordS)
             }
-            STOP -> {
+            STOP -> { // 중지
                 // 오른쪽
                 bining.btnStart.setBackgroundResource(R.drawable.background_btn_start)
                 bining.btnStart.text = getString(R.string.continueS)
@@ -139,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 // 왼쪽
                 bining.btnRecord.text = getString(R.string.resetS)
             }
-            RESET -> {
+            RESET -> { // 초기화
                 // 오른쪽
                 bining.btnStart.setBackgroundResource(R.drawable.background_btn_start)
                 bining.btnStart.text = getString(R.string.startS)
@@ -148,20 +153,23 @@ class MainActivity : AppCompatActivity() {
                 bining.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.gray_dark))
                 bining.btnRecord.text = getString(R.string.recordS)
             }
-            else -> {}
+            else -> {} // 구간기록 버튼 모양 변화 없음
         }
     }
 
+    // 타이머 시작
     private fun timeTaskStart() {
-        timeTask = kotlin.concurrent.timer(period = 10) {
+        timeTask = kotlin.concurrent.timer(period = 10) { // 0.01초 마다 작동
+            // 메인 타이머
             repeatedTime++
             frame = repeatedTime % 100
             second = repeatedTime / 100
-            if (second == 60) {
+            if (second == 60) { // 60초 되면 분++
                 repeatedTime = 0
                 minute ++
             }
 
+            // 구간 기록 타이머
             rvRepeatedTime++
             rvFrame = rvRepeatedTime % 100
             rvSecond = rvRepeatedTime / 100
@@ -170,14 +178,17 @@ class MainActivity : AppCompatActivity() {
                 rvMinute++
             }
 
+            // ui 변경 thread
             runOnUiThread {
                 timeUi()
             }
         }
     }
 
+    // ui 변경 함수
     private fun timeUi() {
         with(bining) {
+            // 메인 타이머
             wholeMinute = if (minute < 10) { "0$minute" } else { "$minute" }
             wholeSecond = if (second < 10) { "0$second" } else { "$second" }
             wholeFrame = if (frame < 10) { "0$frame" } else { "$frame" }
@@ -185,23 +196,27 @@ class MainActivity : AppCompatActivity() {
             wholeTextSecond.text = wholeSecond
             wholeTextFrame.text = wholeFrame
 
+            // 구간 기록 타이머
             sectionMinute = if (rvMinute < 10) { "0$rvMinute" } else { "$rvMinute" }
             sectionSecond = if (rvSecond < 10) { "0$rvSecond" } else { "$rvSecond" }
             sectionFrame = if (rvFrame < 10) { "0$rvFrame" } else { "$rvFrame" }
-
             sectionTextMinute.text = sectionMinute
             sectionTextSecond.text = sectionSecond
             sectionTextFrame.text = sectionFrame
         }
     }
 
+    // 초기화
     private fun reset() {
         timeTask?.cancel()
+
+        // 메인 타이머 초기화
         repeatedTime = 0
         frame = 0
         second = 0
         minute = 0
 
+        // 구간 기록 타이머 초기화
         section = 0
         rvRepeatedTime = 0
         rvFrame = 0
@@ -211,11 +226,13 @@ class MainActivity : AppCompatActivity() {
         myData.removeAll(myData)
         mAdapter.notifyItemRangeRemoved(0, mAdapter.itemCount)
 
+        // ui 변경 thread
         runOnUiThread {
             timeUi()
         }
     }
 
+    // 구간 기록
     private fun record() {
         section++
         val sectionData = if (section < 10) { "0$section" } else { "$section" }
