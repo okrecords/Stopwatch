@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         const val RECORD_START = "noRecord"
     }
 
-    private lateinit var bining: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private var right = START
     private var left = RECORD_START
     private var timeTask: Timer? = null
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bining = ActivityMainBinding.inflate(layoutInflater).also {
+        binding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
 
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        with(bining) {
+        with(binding) {
             btnStart.setOnClickListener { // 오른쪽 버튼 클릭
                 // 버튼 모양 변경
                 buttonDesign(right)
@@ -129,29 +129,29 @@ class MainActivity : AppCompatActivity() {
         when (touch) {
             START, CONTINUE -> { // 시작, 계속
                 // 오른쪽
-                bining.btnStart.setBackgroundResource(R.drawable.background_btn_stop)
-                bining.btnStart.text = getString(R.string.stopS)
+                binding.btnStart.setBackgroundResource(R.drawable.background_btn_stop)
+                binding.btnStart.text = getString(R.string.stopS)
 
                 // 왼쪽
-                bining.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.black))
-                bining.btnRecord.text = getString(R.string.recordS)
+                binding.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.black))
+                binding.btnRecord.text = getString(R.string.recordS)
             }
             STOP -> { // 중지
                 // 오른쪽
-                bining.btnStart.setBackgroundResource(R.drawable.background_btn_start)
-                bining.btnStart.text = getString(R.string.continueS)
+                binding.btnStart.setBackgroundResource(R.drawable.background_btn_start)
+                binding.btnStart.text = getString(R.string.continueS)
 
                 // 왼쪽
-                bining.btnRecord.text = getString(R.string.resetS)
+                binding.btnRecord.text = getString(R.string.resetS)
             }
             RESET -> { // 초기화
                 // 오른쪽
-                bining.btnStart.setBackgroundResource(R.drawable.background_btn_start)
-                bining.btnStart.text = getString(R.string.startS)
+                binding.btnStart.setBackgroundResource(R.drawable.background_btn_start)
+                binding.btnStart.text = getString(R.string.startS)
 
                 // 왼쪽
-                bining.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.gray_dark))
-                bining.btnRecord.text = getString(R.string.recordS)
+                binding.btnRecord.setTextColor(ContextCompat.getColor(baseContext!!, R.color.gray_dark))
+                binding.btnRecord.text = getString(R.string.recordS)
             }
             else -> {} // 구간기록 버튼 모양 변화 없음
         }
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
     // ui 변경 함수
     private fun timeUi() {
-        with(bining) {
+        with(binding) {
             // 메인 타이머
             wholeMinute = if (minute < 10) { "0$minute" } else { "$minute" }
             wholeSecond = if (second < 10) { "0$second" } else { "$second" }
